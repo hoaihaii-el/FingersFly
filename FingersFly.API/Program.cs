@@ -1,4 +1,7 @@
 
+using FingersFly.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace FingersFly.API
 {
     public class Program
@@ -10,7 +13,12 @@ namespace FingersFly.API
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            builder.Services.AddDbContext<StoreContext>(opt =>
+            {
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
+            });
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -24,12 +32,8 @@ namespace FingersFly.API
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }

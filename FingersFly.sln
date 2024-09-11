@@ -5,9 +5,9 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FingersFly.API", "FingersFly.API\FingersFly.API.csproj", "{CCF98930-4919-4BC2-9798-91DA53C874D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingersFly.Domain", "FingersFly.Domain\FingersFly.Domain.csproj", "{0CE81DB6-95E3-43B8-A77D-D4754D1931BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FingersFly.Domain", "FingersFly.Domain\FingersFly.Domain.csproj", "{0CE81DB6-95E3-43B8-A77D-D4754D1931BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingersFly.Infrastructure", "FingersFly.Infrastructure\FingersFly.Infrastructure.csproj", "{FD751687-4374-4221-946E-7E6314816514}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FingersFly.Infrastructure", "FingersFly.Infrastructure\FingersFly.Infrastructure.csproj", "{FD751687-4374-4221-946E-7E6314816514}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
