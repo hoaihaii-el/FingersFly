@@ -1,4 +1,5 @@
 
+using FingersFly.Domain.Interfaces;
 using FingersFly.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,7 @@ namespace FingersFly.API
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
             });
 
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
