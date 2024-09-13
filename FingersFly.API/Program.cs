@@ -1,4 +1,5 @@
 
+using FingersFly.API.Middlewares;
 using FingersFly.Domain.Interfaces;
 using FingersFly.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,7 @@ namespace FingersFly.API
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
+            app.UseMiddleware<ExceptionMiddleware>();
             app.Run();
         }
     }
