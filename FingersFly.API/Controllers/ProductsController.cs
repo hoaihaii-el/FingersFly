@@ -1,4 +1,5 @@
-﻿using FingersFly.Domain.Entities;
+﻿using FingersFly.API.RequestHelpers;
+using FingersFly.Domain.Entities;
 using FingersFly.Domain.Interfaces;
 using FingersFly.Domain.Specifications;
 using Microsoft.AspNetCore.Mvc;
@@ -7,14 +8,19 @@ namespace FingersFly.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController(IGenericRepository<Product> repo) : ControllerBase
+    public class ProductsController(IGenericRepository<Product> repo) : BaseApiController
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts(
-            string? brand, string? type, string? sortCol, string? sortType)
+            [FromQuery]ProductSpecParams specs)
         {
-            var spec = new ProductSpecification(brand, type, sortCol, sortType);
-            return Ok(await repo.ListWithSpecAsync(spec));
+            var spec = new ProductSpecification(specs);
+            var products = await repo.ListWithSpecAsync(spec);
+
+            var count = await repo.CountAsync(spec);
+            var pagination = new Pagination<Product>(specs.Index, specs.PageSize, count, products);
+
+            return Ok(pagination);
         }
 
         [HttpGet("brands")]

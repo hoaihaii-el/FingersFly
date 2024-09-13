@@ -15,6 +15,12 @@ namespace FingersFly.Domain.Specifications
 
         public bool IsDistinct { get; private set; }
 
+        public int Skip { get; private set; }
+
+        public int Take { get; private set; }
+
+        public bool IsPagingEnable { get; private set; }
+
         protected void AddOrderBy(Expression<Func<T, object>>? orderByExpression)
         {
             OrderBy = orderByExpression;
@@ -28,6 +34,23 @@ namespace FingersFly.Domain.Specifications
         protected void AddDistinct()
         {
             IsDistinct = true;
+        }
+
+        protected void ApplyPaging(int skip, int take)
+        {
+            IsPagingEnable = true;
+            Skip = skip;
+            Take = take;
+        }
+
+        public IQueryable<T> ApplyCriteria(IQueryable<T> query)
+        {
+            if (Criteria != null)
+            {
+                query = query.Where(Criteria);
+            }
+
+            return query;
         }
     }
 

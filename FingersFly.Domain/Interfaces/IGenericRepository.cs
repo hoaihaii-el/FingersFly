@@ -17,5 +17,6 @@ namespace FingersFly.Domain.Interfaces
         void Delete(int Id);
         Task<bool> SaveAllAsync();
         bool Exist(int Id);
+        Task<int> CountAsync(ISpecification<T> spec);
     }
 }
