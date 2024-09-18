@@ -21,7 +21,7 @@ namespace FingersFly.API
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
             });
 
-            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped(typeof(IProductRepo), typeof(ProductRepo));
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 

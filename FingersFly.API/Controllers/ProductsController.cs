@@ -1,5 +1,4 @@
-﻿using FingersFly.API.RequestHelpers;
-using FingersFly.Domain.Entities;
+﻿using FingersFly.Domain.Entities;
 using FingersFly.Domain.Interfaces;
 using FingersFly.Domain.Specifications;
 using Microsoft.AspNetCore.Mvc;
@@ -8,53 +7,51 @@ namespace FingersFly.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController(IGenericRepository<Product> repo) : BaseApiController
+    public class ProductsController(IProductRepo repo) : BaseApiController
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts(
-            [FromQuery]ProductSpecParams specs)
+            [FromQuery] ProductSpec specs)
         {
-            var spec = new ProductSpecification(specs);
-            var products = await repo.ListWithSpecAsync(spec);
-
-            var count = await repo.CountAsync(spec);
-            var pagination = new Pagination<Product>(specs.Index, specs.PageSize, count, products);
-
-            return Ok(pagination);
+            return Ok(await repo.GetProducts(specs));
         }
 
         [HttpGet("brands")]
         public async Task<ActionResult<IEnumerable<string>>> GetBrands()
         {
-            var spec = new BrandListSpecification();
-            return Ok(await repo.ListWithSpecAsync(spec));
+            return Ok(await repo.GetBrands());
+        }
+
+        [HttpGet("types")]
+        public async Task<ActionResult<IEnumerable<string>>> GetTypes()
+        {
+            return Ok(await repo.GetTypes());
         }
 
         [HttpPost]
         public async Task<ActionResult> AddProduct(Product product)
         {
-            repo.Add(product);
-            return Ok(await repo.SaveAllAsync());
+            return Ok(await repo.Add(product));
         }
 
         [HttpGet("{Id}")]
         public async Task<ActionResult> GetById(int Id)
         {
-            return Ok(await repo.GetByIdAsync(Id));
+            return Ok(await repo.GetProductById(Id));
         }
 
         [HttpPut()]
         public async Task<ActionResult> Update(Product product)
         {
-            repo.Update(product);
-            return Ok(await repo.SaveAllAsync());
+            await repo.Update(product);
+            return Ok();
         }
 
         [HttpDelete("{Id}")]
         public async Task<ActionResult> Delete(int Id)
         {
-            repo.Delete(Id);
-            return Ok(await repo.SaveAllAsync());
+            await repo.Delete(Id);
+            return Ok();
         }
     }
 }
