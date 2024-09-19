@@ -16,6 +16,11 @@ namespace FingersFly.Infrastructure.Data
             return product; 
         }
 
+        public async Task<int> Count()
+        {
+            return await _context.Products.CountAsync();
+        }
+
         public async Task Delete(int Id)
         {
             var product = await _context.Products.FindAsync(Id);

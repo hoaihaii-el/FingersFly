@@ -12,5 +12,6 @@ namespace FingersFly.Domain.Interfaces
         Task<Product> Add(Product product);
         Task<IReadOnlyList<string>> GetBrands();
         Task<IReadOnlyList<string>> GetTypes();
+        Task<int> Count();
     }
 }

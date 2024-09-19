@@ -13,7 +13,11 @@ namespace FingersFly.API.Controllers
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts(
             [FromQuery] ProductSpec specs)
         {
-            return Ok(await repo.GetProducts(specs));
+            return Ok(new
+            {
+                count = await repo.Count(),
+                products = await repo.GetProducts(specs)
+            });
         }
 
         [HttpGet("brands")]

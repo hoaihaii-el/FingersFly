@@ -24,6 +24,16 @@ namespace FingersFly.API
             builder.Services.AddScoped(typeof(IProductRepo), typeof(ProductRepo));
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200") // Add your production origins as needed
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .AllowCredentials();
+                });
+            });
 
             var app = builder.Build();
 
@@ -35,6 +45,7 @@ namespace FingersFly.API
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("CorsPolicy");
             app.UseAuthorization();
             app.MapControllers();
             app.UseMiddleware<ExceptionMiddleware>();
