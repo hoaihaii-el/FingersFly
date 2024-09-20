@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ShopParams } from '../../shared/models/shopParams';
+import { Product } from '../../shared/models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,10 @@ export class ShopService {
 
   types: string[] = [];
   brands: string[] = [];
+
+  getProduct(id: number) {
+    return this.http.get<Product>(this.baseUrl + 'products/' + id);
+  }
 
   getProducts(shopParams: ShopParams) {
     let params = new HttpParams();

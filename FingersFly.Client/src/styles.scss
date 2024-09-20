@@ -27,3 +27,7 @@ $customTheme: mat.define-theme();
 .text-primary {
     color: #134B70;
 }
+
+.mdc-notched-outline__notch {
+    border-right-style: none !important;
+}
