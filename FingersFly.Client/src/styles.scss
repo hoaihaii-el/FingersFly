@@ -24,8 +24,35 @@ $customTheme: mat.define-theme();
     }
 }
 
+.my-select {
+    margin-left: 15px;
+    padding-right: 10px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 5px;
+    border: 0;
+    background-position: right 15px top 50%;
+}
+
 .text-primary {
     color: #134B70;
+}
+
+.btn {
+    background-color: #fff;
+    border-radius: 4px;
+    border: 2px solid #705C53;
+    color: #705C53;
+    padding: 3px 10px;
+    margin-left: 4px;
+    margin-right: 4px;
+    min-width: 100px;
+}
+
+.btn:hover {
+    background-color: #F5F5F7;
 }
 
 .mdc-notched-outline__notch {

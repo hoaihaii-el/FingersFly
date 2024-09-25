@@ -2,12 +2,12 @@
 <div class="flex flex-col gap-3">
     <div class="flex justify-between">
         <mat-paginator class="bg-white" (page)="handlePageEvent($event)" [length]="productsCount"
-            [pageSize]="shopParams.pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="pageSizeOptions"
-            [pageIndex]="shopParams.pageIndex - 1" aria-label="Select page">
+        [pageSize]="shopParams.pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="pageSizeOptions"
+        [pageIndex]="shopParams.pageIndex - 1" aria-label="Select page">
 
-        </mat-paginator>
+    </mat-paginator>
 
-        <form #searchForm="ngForm" (ngSubmit)="onSearchChange()"
+        <form #searchForm="ngForm" (ngSubmit)="onSearchChange()"            
             class="relative flex items-center w-full max-w-md mx-4">
             <input type="search" class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg"
                 placeholder="Search" name="search" [(ngModel)]="shopParams.search">
@@ -16,13 +16,24 @@
             </button>
         </form>
 
+        <!-- <form #searchForm="ngForm" (ngSubmit)="onSearchChange()">   
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none mx-2">
+                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input type="search" id="search" [(ngModel)]="shopParams.search" class="block w-full ml-1 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search" required />
+            </div>
+        </form> -->
+
         <div class="flex">
-            <button mat-stroked-button class="mx-3" (click)="openFilterDialog()">
-                <mat-icon>filter_list</mat-icon>
+            <button class="btn" (click)="openFilterDialog()">
+                <i class="fa-solid fa-filter"></i>
                 Filters
             </button>
-            <button mat-stroked-button [matMenuTriggerFor]="sortMenu">
-                <mat-icon>swap_vert</mat-icon>
+            <button class="btn" [matMenuTriggerFor]="sortMenu">
+                <i class="fa-solid fa-sort"></i>
                 Sort
             </button>
         </div>

@@ -5,11 +5,12 @@
         <a routerLink="/shop" routerLinkActive="active" class="p-2">SHOP</a>
         <a href="" class="p-2">CONTACT</a>
     </div>
-    <div>
-        <a matBadge="5" matbadgeSize="large" class="align-middle">
-            <mat-icon style="font-size: 28px;">shopping_cart</mat-icon>
-        </a>
-        <button mat-stroked-button class="w-24 mx-3">Login</button>
-        <button mat-stroked-button class="w-24">Register</button>
+    <div class="flex cursor-pointer">
+        <div class="relative mr-2">
+            <i class="fas fa-shopping-cart text-xl mr-2"></i>
+            <span class="absolute -top-2 right-0 bg-slate-300 px-1 py-0.5 rounded-full text-xs">5</span>
+        </div>
+        <button class="btn">Login</button>
+        <button class="btn">Register</button>
     </div>
 </div>

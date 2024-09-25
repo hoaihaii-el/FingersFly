@@ -32,6 +32,10 @@ namespace FingersFly.API
                            .AllowAnyMethod()
                            .AllowAnyHeader()
                            .AllowCredentials();
+                    builder.WithOrigins("https://localhost:4200")
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .AllowCredentials();
                 });
             });
 
