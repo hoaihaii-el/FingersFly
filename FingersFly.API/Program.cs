@@ -2,7 +2,9 @@
 using FingersFly.API.Middlewares;
 using FingersFly.Domain.Interfaces;
 using FingersFly.Infrastructure.Data;
+using FingersFly.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 namespace FingersFly.API
 {
@@ -38,6 +40,18 @@ namespace FingersFly.API
                            .AllowCredentials();
                 });
             });
+            builder.Services.AddSingleton<IConnectionMultiplexer>(cf =>
+            {
+                var conStr = builder.Configuration.GetConnectionString("Redis");
+                if (conStr == null)
+                {
+                    throw new Exception("Can not get Redis connection string!");
+                }
+                var configuration = ConfigurationOptions.Parse(conStr, true);
+                return ConnectionMultiplexer.Connect(configuration);
+            });
+
+            builder.Services.AddSingleton<ICartService, CartService>();
 
             var app = builder.Build();
 
