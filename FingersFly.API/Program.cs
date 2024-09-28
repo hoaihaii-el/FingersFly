@@ -1,5 +1,6 @@
 
 using FingersFly.API.Middlewares;
+using FingersFly.Domain.Entities;
 using FingersFly.Domain.Interfaces;
 using FingersFly.Infrastructure.Data;
 using FingersFly.Infrastructure.Services;
@@ -30,11 +31,7 @@ namespace FingersFly.API
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {
-                    builder.WithOrigins("http://localhost:4200") // Add your production origins as needed
-                           .AllowAnyMethod()
-                           .AllowAnyHeader()
-                           .AllowCredentials();
-                    builder.WithOrigins("https://localhost:4200")
+                    builder.WithOrigins("http://localhost:4200", "https://localhost:4200") // Add your production origins as needed
                            .AllowAnyMethod()
                            .AllowAnyHeader()
                            .AllowCredentials();
@@ -52,6 +49,9 @@ namespace FingersFly.API
             });
 
             builder.Services.AddSingleton<ICartService, CartService>();
+            builder.Services.AddAuthorization();
+            builder.Services.AddIdentityApiEndpoints<AppUser>()
+                .AddEntityFrameworkStores<StoreContext>();
 
             var app = builder.Build();
 
@@ -66,6 +66,9 @@ namespace FingersFly.API
             app.UseCors("CorsPolicy");
             app.UseAuthorization();
             app.MapControllers();
+
+            app.MapGroup("api").MapIdentityApi<AppUser>();
+
             app.UseMiddleware<ExceptionMiddleware>();
             app.Run();
         }
