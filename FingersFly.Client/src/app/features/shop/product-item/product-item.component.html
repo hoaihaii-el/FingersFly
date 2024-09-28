@@ -5,7 +5,7 @@
     <mat-card-content class="mt-2">
         <h2 class="text-lg font-semibold">{{product.name}}</h2>
         <p>{{product.price | currency}}</p>
-        <button class="btn w-full">Add to cart</button>
+        <button class="btn w-full" (click)="cartService.addItemToCart(product)">Add to cart</button>
     </mat-card-content>
 </mat-card>
 }

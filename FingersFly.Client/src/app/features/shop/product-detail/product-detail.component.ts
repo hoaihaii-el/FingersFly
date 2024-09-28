@@ -8,6 +8,8 @@ import { MatInput } from '@angular/material/input';
 import { MatDivider } from '@angular/material/divider';
 import { ShopService } from '../../../core/services/shop.service';
 import { Product } from '../../../shared/models/product';
+import { CartService } from '../../../core/services/cart.service';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-product-detail',
@@ -19,7 +21,8 @@ import { Product } from '../../../shared/models/product';
     MatFormField,
     MatInput,
     MatLabel,
-    MatDivider
+    MatDivider,
+    FormsModule
   ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
@@ -28,6 +31,9 @@ export class ProductDetailComponent implements OnInit {
   private shopService = inject(ShopService);
   private activatedRoute = inject(ActivatedRoute);
   product?: Product;
+  quantity = 1;
+  cartService = inject(CartService);
+  maxQuantityAvailable = 1;
 
   ngOnInit(): void {
     this.getProduct();
@@ -41,10 +47,17 @@ export class ProductDetailComponent implements OnInit {
     this.shopService.getProduct(+productId).subscribe({
       next: (product: Product) => {
         this.product = product;
+        this.maxQuantityAvailable = product.quantityInStock;
       },
       error: (error: any) => {
         console.error(error);
       }
     });
+  }
+
+  updateCartQuantity() {
+    if (this.product) {
+      this.cartService.addItemToCart(this.product, this.quantity);
+    }
   }
 }

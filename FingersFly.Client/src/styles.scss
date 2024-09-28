@@ -51,6 +51,18 @@ $customTheme: mat.define-theme();
     min-width: 100px;
 }
 
+.icon-btn {
+    background-color: #fff;
+    padding: 3px 10px;
+    margin-left: 4px;
+    margin-right: 4px;
+    min-width: 40px;
+}
+
+.icon-btn:hover {
+    transform: scale(1.05);
+}
+
 .btn:hover {
     background-color: #F5F5F7;
 }

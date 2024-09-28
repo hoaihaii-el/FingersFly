@@ -30,7 +30,10 @@ namespace FingersFly.Infrastructure.Data
 
         public async Task<IReadOnlyList<string>> GetBrands()
         {
-            return await _context.Products.Select(p => p.Brand).ToListAsync();
+            return await _context.Products
+                .Select(p => p.Brand)
+                .Distinct()
+                .ToListAsync();
         }
 
         public async Task<Product> GetProductById(int Id)
@@ -60,11 +63,6 @@ namespace FingersFly.Infrastructure.Data
                 };
             }
 
-            if (spec.PageSize > 0)
-            {
-                products = products.Skip((spec.PageIndex - 1) * spec.PageSize).Take(spec.PageSize);
-            }
-
             if (spec.SortType == null || spec.SortType.Contains("asc", StringComparison.OrdinalIgnoreCase))
             {
                 products = products.OrderBy(keySelector);
@@ -74,12 +72,20 @@ namespace FingersFly.Infrastructure.Data
                 products = products.OrderByDescending(keySelector);
             }
 
+            if (spec.PageSize > 0)
+            {
+                products = products.Skip((spec.PageIndex - 1) * spec.PageSize).Take(spec.PageSize);
+            }
+
             return await products.ToListAsync();
         }
 
         public async Task<IReadOnlyList<string>> GetTypes()
         {
-            return await _context.Products.Select(p => p.Type).ToListAsync();
+            return await _context.Products
+                .Select(p => p.Type)
+                .Distinct()
+                .ToListAsync();
         }
 
         public async Task Update(Product product)

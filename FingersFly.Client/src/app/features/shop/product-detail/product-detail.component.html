@@ -12,15 +12,16 @@
                         {{product.price | currency}}
                     </p>
                 </div>
+                <div class="mt-2">{{maxQuantityAvailable}} product(s) available.</div>
                 <div class="mt-6">
                     <mat-form-field appearance="outline" class="flex">
                         <mat-label>Quantity</mat-label>
-                        <input matInput type="number">
+                        <input matInput min="1" max="{{maxQuantityAvailable}}" [(ngModel)]="quantity" type="number">
                     </mat-form-field>
                 </div>
                 <div class="flex gap-4 mb-6">
-                    <button mat-flat-button>
-                        <mat-icon>add_shopping_cart</mat-icon>
+                    <button class="btn w-52" (click)="updateCartQuantity()">
+                        <i class="fa-solid fa-cart-shopping"></i>
                         Add to cart
                     </button>
                 </div>
