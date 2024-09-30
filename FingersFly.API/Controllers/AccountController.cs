@@ -40,7 +40,6 @@ namespace FingersFly.API.Controllers
             return NoContent();
         }
 
-        [Authorize]
         [HttpGet("user-info")]
         public async Task<IActionResult> GetUserInfo()
         {

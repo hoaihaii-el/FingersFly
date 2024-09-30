@@ -10,7 +10,12 @@
             <i class="fas fa-shopping-cart text-xl mr-2"></i>
             <span class="absolute -top-2 right-0 bg-slate-300 px-1 py-0.5 rounded-full text-xs">{{cartService.itemCount()}}</span>
         </a>
-        <button class="btn">Login</button>
-        <button class="btn">Register</button>
+        @if (accountService.currentUser()) {
+            <button (click)="logout()" class="btn">Logout</button>
+        }
+        @else{
+        <button routerLink="/account/login" class="btn">Login</button>
+        <button routerLink="/account/register" class="btn">Register</button>
+        }
     </div>
 </div>
